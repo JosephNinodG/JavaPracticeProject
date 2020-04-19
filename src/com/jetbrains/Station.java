@@ -4,8 +4,8 @@ public class Station {
     private float id;
     private float latitude;
     private float longitude;
-    private float name;
-    private float display_name;
+    private String name;
+    private String display_name;
     private float zone;
     private float total_lines;
     private float rail;
@@ -14,8 +14,8 @@ public class Station {
         id = Float.parseFloat(rowData[0]);
         latitude = Float.parseFloat(rowData[1]);
         longitude = Float.parseFloat(rowData[2]);
-        name = Float.parseFloat(rowData[3]);
-        display_name = Float.parseFloat(rowData[4]);
+        name = rowData[3];
+        display_name = rowData[4];
         zone = Float.parseFloat(rowData[5]);
         total_lines = Float.parseFloat(rowData[6]);
         rail = Float.parseFloat(rowData[7]);
@@ -41,13 +41,13 @@ public class Station {
         return longitude;
     }
 
-    public void setName(float name) { this.name = name; }
+    public void setName(String name) { this.name = name; }
 
-    public float getName() { return name; }
+    public String getName() { return name; }
 
-    public void setDisplayName(float display_name) { this.display_name = display_name; }
+    public void setDisplayName(String display_name) { this.display_name = display_name; }
 
-    public float getDisplayName() { return display_name; }
+    public String getDisplayName() { return display_name; }
 
     public void setZone(float zone) { this.zone = zone; }
 

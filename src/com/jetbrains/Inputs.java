@@ -2,9 +2,10 @@ package com.jetbrains;
 
 import java.util.*;
 
-public class InputCheck {
+public class Inputs {
 
     public static Scanner in = new Scanner(System.in);
+
 
     public static String checkInput(String s) {
         String input = "";
@@ -28,5 +29,3 @@ public class InputCheck {
     }
 
 }
-
-

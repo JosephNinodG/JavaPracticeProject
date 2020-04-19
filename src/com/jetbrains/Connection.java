@@ -13,6 +13,7 @@ public class Connection {
         time = Float.parseFloat(rowData[3]);
     }
 
+
     public void setStation1(float station1) { this.station1 = station1; }
 
     public float getStation1() { return station1; }

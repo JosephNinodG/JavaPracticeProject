@@ -9,37 +9,53 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        ArrayList<Station> connectionList = readFiles("londonconnections.csv");
-        ArrayList<Station> linesList = readFiles("londonlines.csv");
-        ArrayList<Station> stationList = readFiles("londonstations.csv");
+        ArrayList<Connection> connectionList = readFile("londonconnections.csv", "Connection");
+        ArrayList<Line> lineList = readFile("londonlines.csv", "Line");
+        ArrayList<Station> stationList = readFile("londonstations.csv", "Station");
 
-//        String start;
-//        String end;
+        String startingStation;
+        String endingStation;
+
+        startingStation = Inputs.checkInput("starting station");
+        endingStation = Inputs.checkInput("ending station");
+
+        System.out.println("Your stations are: " + startingStation + " and " + endingStation);
 //
-//        start = InputCheck.checkInput("starting station");
-//        end = InputCheck.checkInput("ending station");
-//
-//        System.out.println("Your stations are: " + start + " and " + end);
-//
-//        for(int i = 0;i<stationList.size();i++){
+//        for (int i = 0; i < stationList.size(); i++) {
 //            System.out.println(stationList.get(i).getLongitude());
 //        }
 
 
     }
 
-    public static ArrayList<Station> readFiles(String path) throws IOException {
+    public static <T> ArrayList<T> readFile(String path, String className) throws IOException {
 
         String row = "";
-        ArrayList<Station> fileData = new ArrayList<Station>();
+        ArrayList<T> fileData = new ArrayList<>();
 
         File csvFile = new File(path);
         if (csvFile.isFile()) {
             BufferedReader csvReader = new BufferedReader(new FileReader(path));
+            int iteration = 0;
             while ((row = csvReader.readLine()) != null) {
-                String[] rowData = row.split(",");
-                Station newStation = new Station(rowData);
-                fileData.add(newStation);
+                if (iteration == 0) {
+                    iteration++;
+                    continue;
+                } else {
+                    String[] rowData = row.split(",");
+
+                    if (className.equals("Connection")) {
+                        Connection newConnection = new Connection(rowData);
+                        fileData.add((T) newConnection);
+                    } else if (className.equals("Line")) {
+                        Line newLine = new Line(rowData);
+                        fileData.add((T) newLine);
+                    } else if (className.equals("Station")) {
+                        Station newStation = new Station(rowData);
+                        fileData.add((T) newStation);
+                    }
+
+                }
 
             }
             csvReader.close();
@@ -47,4 +63,6 @@ public class Main {
 
         return fileData;
     }
+
+
 }
